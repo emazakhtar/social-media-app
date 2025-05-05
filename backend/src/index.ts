@@ -37,6 +37,9 @@ app.get("/", (req: Request, res: Response) => {
 // Database connection
 connectDB();
 
+// Serve static files from "build"
+app.use(express.static(path.join(__dirname, "build")));
+
 // HTTP and Socket.IO server setup
 const server = http.createServer(app);
 const io = new SocketIOServer(server, {
@@ -57,6 +60,10 @@ app.use("/api/users", protect, usersRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/conversation", conversationRoutes);
 app.use("/api/messages", messagesRouter);
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 // Error handler middleware (should be the last middleware)
 app.use(errorHandler);

@@ -131,6 +131,29 @@ const Navbar: React.FC = () => {
     }
   };
 
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (
+        !target.closest(`.${styles.mobileMenu}`) &&
+        !target.closest(`.${styles.mobileMenuButton}`)
+      ) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
+
+  // Close menu when route changes
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [window.location.pathname]);
+
   return (
     <>
       <nav
@@ -175,6 +198,10 @@ const Navbar: React.FC = () => {
         </div>
 
         <div className={styles.navActions}>
+          <Link to="/" className={`${styles.navLink} ${styles.homeIcon}`}>
+            <FaHome size={20} />
+          </Link>
+
           <Link to="/messages" className={styles.navLink}>
             <div className={styles.iconContainer}>
               <FaEnvelope size={20} />
@@ -194,6 +221,18 @@ const Navbar: React.FC = () => {
             )}
           </div>
 
+          <button
+            className={`${styles.mobileMenuButton} ${
+              isMenuOpen ? styles.active : ""
+            }`}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
           {isLoggedIn ? (
             <button onClick={handleLogout} className={styles.logoutButton}>
               <FaSignOutAlt size={18} />
@@ -205,6 +244,40 @@ const Navbar: React.FC = () => {
               <span>Login</span>
             </Link>
           )}
+        </div>
+
+        <div
+          className={`${styles.mobileMenu} ${isMenuOpen ? styles.active : ""}`}
+        >
+          <div className={styles.mobileMenuLinks}>
+            <Link to="/profile" className={styles.mobileMenuLink}>
+              <FaUser size={20} />
+              <span>Profile</span>
+            </Link>
+            <Link to="/friends" className={styles.mobileMenuLink}>
+              <FaUserFriends size={20} />
+              <span>Friends</span>
+            </Link>
+            <Link to="/search" className={styles.mobileMenuLink}>
+              <FaSearch size={20} />
+              <span>Search</span>
+            </Link>
+            <Link to="/create-post" className={styles.mobileMenuLink}>
+              <FaPlus size={20} />
+              <span>New Post</span>
+            </Link>
+            {isLoggedIn ? (
+              <button onClick={handleLogout} className={styles.mobileMenuLink}>
+                <FaSignOutAlt size={20} />
+                <span>Logout</span>
+              </button>
+            ) : (
+              <Link to="/login" className={styles.mobileMenuLink}>
+                <FaSignInAlt size={20} />
+                <span>Login</span>
+              </Link>
+            )}
+          </div>
         </div>
 
         {showNotifications && (

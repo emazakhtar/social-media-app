@@ -42,6 +42,10 @@
   transition: all 0.2s ease;
 }
 
+.navLink span {
+  display: inline-block;
+}
+
 .navLink:hover {
   background: rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
@@ -182,4 +186,149 @@
 .notificationPanel small {
   color: #666;
   font-size: 0.75rem;
+}
+
+/* Mobile Menu Styles */
+.mobileMenuButton {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 0.5rem;
+  position: relative;
+  z-index: 1001;
+}
+
+.mobileMenuButton span {
+  display: block;
+  width: 25px;
+  height: 2px;
+  background-color: #fff;
+  margin: 5px 0;
+  transition: all 0.3s ease;
+}
+
+.mobileMenuButton.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.mobileMenuButton.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobileMenuButton.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.mobileMenu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 280px;
+  height: 100vh;
+  background: rgba(51, 51, 51, 0.98);
+  backdrop-filter: blur(10px);
+  padding: 80px 20px 20px;
+  transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.mobileMenu.active {
+  right: 0;
+}
+
+.mobileMenuLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mobileMenuLink {
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  font-size: 1.1rem;
+}
+
+.mobileMenuLink:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(5px);
+}
+
+.mobileMenuLink svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .mobileMenuButton {
+    display: block;
+  }
+
+  .navLinks {
+    display: none;
+  }
+
+  .navActions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-left: auto; /* Push to the right */
+  }
+
+  .navActions .navLink:not(:first-child):not(:nth-child(2)) {
+    display: none;
+  }
+
+  .mobileMenu.active {
+    right: 0;
+  }
+
+  /* Add home icon styles */
+  .homeIcon {
+    margin-right: auto; /* Push to the extreme left */
+    margin-left: 0;
+  }
+}
+
+/* Small screen adjustments */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0.75rem;
+  }
+
+  .navLink span {
+    font-size: 0.8rem;
+  }
+
+  .iconContainer svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .badge {
+    font-size: 0.7rem;
+    min-width: 18px;
+    padding: 0.2rem 0.4rem;
+  }
+
+  .logoutButton,
+  .loginButton {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .logoutButton svg,
+  .loginButton svg {
+    width: 14px;
+    height: 14px;
+  }
 }

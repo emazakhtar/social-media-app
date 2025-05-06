@@ -78,7 +78,7 @@ router.post("/login", async (req: Request, res: Response) => {
     const token = jwt.sign(
       { userId: user._id },
       process.env.JWT_SECRET || "secret", // In production, store the secret in an environment variable.
-      { expiresIn: "1h" } // The token will expire in 1 hour.
+      { expiresIn: "7d" } // The token will expire in 1 hour.
     );
 
     // Send the token and some user info (excluding the password) back to the client.

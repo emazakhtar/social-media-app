@@ -10,6 +10,7 @@ import FriendsPage from "./pages/FriendsPage";
 import UserSearchPage from "./pages/UserSearchPage";
 import ChatPage from "./pages/ChatPage";
 import ConversationListPage from "./pages/ConversationListPage";
+import Protected from "./components/Protected";
 
 const App: React.FC = () => {
   return (
@@ -18,14 +19,65 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/profile/:userId" element={<ProfilePage />} />
         <Route path="/" element={<HomePage />} />
-        <Route path="/create-post" element={<CreatePostPage />} />
-        <Route path="/friends" element={<FriendsPage />} />
-        <Route path="/search" element={<UserSearchPage />} />
-        <Route path="/messages" element={<ConversationListPage />} />
-        <Route path="/chat/:otherUserId" element={<ChatPage />} />
+
+        {/* *******************all protected routes************************************ */}
+        <Route
+          path="/profile"
+          element={
+            <Protected>
+              <ProfilePage />
+            </Protected>
+          }
+        />
+        <Route
+          path="/profile/:userId"
+          element={
+            <Protected>
+              <ProfilePage />
+            </Protected>
+          }
+        />
+        <Route
+          path="/create-post"
+          element={
+            <Protected>
+              <CreatePostPage />
+            </Protected>
+          }
+        />
+        <Route
+          path="/friends"
+          element={
+            <Protected>
+              <FriendsPage />
+            </Protected>
+          }
+        />
+        <Route
+          path="/search"
+          element={
+            <Protected>
+              <UserSearchPage />
+            </Protected>
+          }
+        />
+        <Route
+          path="/messages"
+          element={
+            <Protected>
+              <ConversationListPage />
+            </Protected>
+          }
+        />
+        <Route
+          path="/chat/:otherUserId"
+          element={
+            <Protected>
+              <ChatPage />
+            </Protected>
+          }
+        />
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>

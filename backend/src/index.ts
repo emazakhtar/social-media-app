@@ -54,7 +54,7 @@ initializeSocket(io);
 // Mount routes
 app.use("/api/auth", authRoutes);
 app.use("/api/profile", protect, profileRoutes);
-app.use("/api/posts", protect, postRoutes);
+app.use("/api/posts", postRoutes);
 app.use("/api/friends", protect, friendsRoutes);
 app.use("/api/users", protect, usersRoutes);
 app.use("/api/chat", chatRoutes);

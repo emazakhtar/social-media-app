@@ -49,7 +49,7 @@ router.post(
 );
 
 // Retrieve posts (protected route)
-router.get("/", protect, async (req: Request, res: Response) => {
+router.get("/", async (req: Request, res: Response) => {
   try {
     const { search } = req.query;
     let filter = {};

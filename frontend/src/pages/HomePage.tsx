@@ -20,11 +20,11 @@ const HomePage: React.FC = () => {
   const [error, setError] = useState("");
 
   const token = localStorage.getItem("token") || "";
-
+  console.log("localhost removed from everywhere");
   const fetchPosts = async (query = "") => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/posts?search=${encodeURIComponent(query)}`,
+        `/api/posts?search=${encodeURIComponent(query)}`,
         {
           headers: {
             "Content-Type": "application/json",

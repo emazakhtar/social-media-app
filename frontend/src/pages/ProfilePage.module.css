@@ -1,0 +1,81 @@
+.profileContainer {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f2f5;
+  min-height: 100vh;
+}
+
+.profileInfo {
+  max-width: 1200px;
+  margin: 20px auto 0;
+  padding: 0 20px;
+  position: relative;
+}
+
+.profilePicture {
+  width: 168px;
+  height: 168px;
+  border-radius: 50%;
+  border: 4px solid white;
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  top: 0;
+  left: 20px;
+}
+
+.profileContent {
+  margin-top: 0;
+  display: flex;
+  gap: 20px;
+  padding-top: 180px;
+}
+
+.mainContent {
+  flex: 2;
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar {
+  flex: 1;
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.statsContainer {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.statItem {
+  text-align: center;
+  padding: 10px;
+  background: #f0f2f5;
+  border-radius: 8px;
+  flex: 1;
+}
+
+.bioSection {
+  margin: 20px 0;
+  padding: 15px;
+  background: #f0f2f5;
+  border-radius: 8px;
+}
+
+.photosGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+}
+
+.photoPlaceholder {
+  aspect-ratio: 1;
+  background: #f0f2f5;
+}

@@ -2,6 +2,7 @@ import { Router, Request, Response } from "express";
 import Post, { IPost } from "../models/Post";
 import { upload } from "../middlewares/upload";
 import { protect } from "../middlewares/authMiddleware"; // Import middleware
+import User from "../models/User";
 
 const router = Router();
 
@@ -18,11 +19,27 @@ router.post(
           .status(400)
           .json({ message: "Content and userId are required." });
       }
+
+      // Get user's username
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(404).json({ message: "User not found." });
+      }
+
       let imageUrl;
       if (req.file) {
         imageUrl = `/uploads/${req.file.filename}`;
       }
-      const post: IPost = new Post({ userId, content, imageUrl });
+
+      const post: IPost = new Post({
+        userId,
+        username: user.username,
+        content,
+        imageUrl,
+        likes: 0,
+        comments: 0,
+        isLiked: false,
+      });
       await post.save();
       res.status(201).json({ message: "Post created successfully", post });
     } catch (error) {

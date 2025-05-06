@@ -1,0 +1,30 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master # Change this to your main branch if needed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup SSH Key and Known Hosts
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          # Save the SSH private key
+          echo "$SSH_PRIVATE_KEY" > keyfile
+          chmod 600 keyfile
+
+          # Add the EC2 server to known hosts
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ec2-3-27-250-34.ap-southeast-2.compute.amazonaws.com >> ~/.ssh/known_hosts
+
+      - name: SSH into EC2 and Deploy
+        run: |
+          ssh -T -i keyfile ubuntu@ec2-3-27-250-34.ap-southeast-2.compute.amazonaws.com "sudo bash ~/first-ecommerce-backend/scripts/deploy.sh"

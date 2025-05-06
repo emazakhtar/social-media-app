@@ -5,9 +5,13 @@ import { Link } from "react-router-dom";
 interface Post {
   _id: string;
   userId: string;
+  username: string;
   content: string;
   imageUrl?: string;
   createdAt: string;
+  likes: number;
+  comments: number;
+  isLiked: boolean;
 }
 
 const HomePage: React.FC = () => {
@@ -24,7 +28,7 @@ const HomePage: React.FC = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // Here we attach the token
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -32,7 +36,15 @@ const HomePage: React.FC = () => {
       if (!response.ok) {
         setError(data.message || "Failed to fetch posts.");
       } else {
-        setPosts(data.posts);
+        // Transform the posts data to include required properties
+        const transformedPosts = data.posts.map((post: any) => ({
+          ...post,
+          username: post.username || "Anonymous",
+          likes: post.likes || 0,
+          comments: post.comments || 0,
+          isLiked: post.isLiked || false,
+        }));
+        setPosts(transformedPosts);
       }
     } catch (err) {
       setError("An error occurred while fetching posts.");
@@ -42,6 +54,21 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     fetchPosts(search);
   }, [search]);
+
+  const handleLike = (postId: string) => {
+    // Implement like functionality
+    console.log("Liked post:", postId);
+  };
+
+  const handleComment = (postId: string) => {
+    // Implement comment functionality
+    console.log("Comment on post:", postId);
+  };
+
+  const handleShare = (postId: string) => {
+    // Implement share functionality
+    console.log("Share post:", postId);
+  };
 
   return (
     <div style={{ maxWidth: "800px", margin: "auto", padding: "20px" }}>
@@ -55,7 +82,13 @@ const HomePage: React.FC = () => {
       />
       {error && <p style={{ color: "red" }}>{error}</p>}
       {posts.map((post) => (
-        <Post key={post._id} post={post} />
+        <Post
+          key={post._id}
+          post={post}
+          onLike={handleLike}
+          onComment={handleComment}
+          onShare={handleShare}
+        />
       ))}
       <Link to="/create-post" style={{ display: "block", marginTop: "20px" }}>
         Create a new post

@@ -22,7 +22,7 @@ const UserSearchPage: React.FC = () => {
   const fetchUsers = async (query = "") => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/users?search=${encodeURIComponent(query)}`,
+        `/api/users?search=${encodeURIComponent(query)}`,
         {
           headers: {
             "Content-Type": "application/json",

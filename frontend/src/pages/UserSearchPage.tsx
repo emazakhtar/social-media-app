@@ -49,7 +49,7 @@ const UserSearchPage: React.FC = () => {
   // Function to send a friend request (for simplicity, directly add friend).
   const addFriend = async (friendId: string) => {
     try {
-      const response = await fetch("http://localhost:5000/api/friends/add", {
+      const response = await fetch("/api/friends/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId: currentUserId, friendId }),

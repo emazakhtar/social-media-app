@@ -31,7 +31,7 @@ app.use("/uploads", express.static(path.join(__dirname, "./uploads")));
 
 // Test route
 app.get("/", (req: Request, res: Response) => {
-  res.send("Welcome to the Social Media App Server!");
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 // Database connection

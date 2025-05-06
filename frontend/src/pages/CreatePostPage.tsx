@@ -59,7 +59,7 @@ const CreatePostPage: React.FC = () => {
       formData.append("privacy", privacy);
       if (image) formData.append("image", image);
 
-      const response = await fetch("http://localhost:5000/api/posts", {
+      const response = await fetch("/api/posts", {
         method: "POST",
         body: formData,
         headers: {

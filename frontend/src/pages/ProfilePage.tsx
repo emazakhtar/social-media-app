@@ -29,7 +29,7 @@ const ProfilePage: React.FC = () => {
     const fetchProfile = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/profile/${userId}`,
+          `/api/profile/${userId}`,
           {
             headers: {
               "Content-Type": "application/json",

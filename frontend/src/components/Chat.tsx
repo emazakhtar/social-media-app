@@ -42,20 +42,17 @@ const Chat: React.FC<ChatProps> = ({
   const [error, setError] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [isOnline, setIsOnline] = useState(false);
-
+  console.log("gjhjhjh");
   // fetching the chat messages using roomid
   useEffect(() => {
     const fetchAllMessages = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:5000/api/messages/history/${roomId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const response = await fetch(`/api/messages/history/${roomId}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+          },
+        });
 
         const data = await response.json();
         console.log(data);

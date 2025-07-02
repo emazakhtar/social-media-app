@@ -19,7 +19,7 @@ const FriendsPage: React.FC = () => {
   const fetchFriends = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/friends/${currentUserId}`,
+        `/api/friends/${currentUserId}`,
         {
           headers: {
             "Content-Type": "application/json",

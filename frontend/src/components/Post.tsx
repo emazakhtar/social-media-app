@@ -28,7 +28,7 @@ interface PostProps {
 
 const Post: React.FC<PostProps> = ({ post, onLike, onComment, onShare }) => {
   const [showOptions, setShowOptions] = useState(false);
-
+  const API_URL = process.env.REACT_APP_API_URL;
   return (
     <div className={styles.post}>
       {/* Post Header */}
@@ -128,7 +128,7 @@ const Post: React.FC<PostProps> = ({ post, onLike, onComment, onShare }) => {
           }}
         >
           <img
-            src={`http://localhost:5000${encodeURI(post.imageUrl)}`}
+            src={`${encodeURI(post.imageUrl)}`}
             alt="Post content"
             style={{
               width: "100%",

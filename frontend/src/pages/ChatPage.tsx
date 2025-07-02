@@ -30,7 +30,7 @@ const ChatPage: React.FC = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          `http://localhost:5000/api/profile/${otherUserId}`,
+          `/api/profile/${otherUserId}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,

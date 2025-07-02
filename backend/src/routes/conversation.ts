@@ -7,7 +7,7 @@ const router = Router();
 // List all conversations involving current user
 router.get("/", protect, async (req, res) => {
   console.log(req.query);
-  const userId = req.user.id;
+  const userId = req.user!.id;
   const convos = await Conversation.find({
     participants: userId,
   })

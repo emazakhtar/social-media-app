@@ -67,7 +67,7 @@ router.post(
 // GET /api/messages/unread-count
 router.get("/unread-count", protect, async (req, res) => {
   try {
-    const userId = req.user.id; // set by authMiddleware
+    const userId = req.user!.id; // set by authMiddleware
     // Count messages where recipient is the current user and read flag is false
     const count = await Message.countDocuments({ to: userId, read: false });
     return res.json({ count });
